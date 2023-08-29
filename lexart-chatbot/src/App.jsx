@@ -1,19 +1,13 @@
 import ChatBot from 'react-simple-chatbot';
+import step from './steps/chatBotSteps'
 import './App.css'
 
 function App() {
-
-
   return (
     <>
       <ChatBot
-        steps={[
-          {
-            id: 'hello-world',
-            message: 'Hello World!',
-            end: true,
-          },
-        ]}
+        headerTitle="Chat-Bot"
+        steps={step.chat}
       />
     </>
   )
