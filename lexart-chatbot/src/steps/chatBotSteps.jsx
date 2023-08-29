@@ -1,3 +1,7 @@
+import Loan from '../components/Loan';
+import Help from '../components/Help';
+import LoanCondition from '../components/LoanCondition';
+
 const secondMessage = ({previousValue}) => {
   const message = (previousValue || '').toLowerCase();
   if (message.includes('goodbye')) {
@@ -67,7 +71,7 @@ const chat = [
   {
     id: '10',
     options: [
-      {value: 'Do you want to apply for a loan?', label: 'Loan', trigger: 'loan'},
+      {value: 'Loan', label: 'Do you want to apply for a loan?', trigger: 'loan'},
       {value: 'Help', label: 'Help', trigger: 'help'},
       {value: 'Loan conditions', label: 'Loan conditions', trigger: 'conditions'},
     ]
@@ -79,17 +83,17 @@ const chat = [
   },
   {
     id: 'loan',
-    message: 'loaning',
+    component: <Loan />,
     trigger: 'bye'
   },
   {
     id: 'help',
-    message: 'helping',
+    component: <Help />,
     trigger: 'bye'
   },
   {
     id:'conditions',
-    message: 'conditions',
+    component: <LoanCondition />,
     trigger: 'bye'
   },
 
