@@ -1,6 +1,7 @@
 import Loan from '../components/Loan';
 import Help from '../components/Help';
 import LoanCondition from '../components/LoanCondition';
+import GoodBye from '../components/GoodBye';
 
 const secondMessage = ({previousValue}) => {
   const message = (previousValue || '').toLowerCase();
@@ -47,7 +48,7 @@ const chat = [
   },
   {
     id: '6',
-    message: 'Now we have to create a password for you, please informe me of it.',
+    message: 'Now we have to create a password for you, what will it be?',
     trigger: '7'
   },
   {
@@ -57,13 +58,14 @@ const chat = [
   },
   {
     id: '8',
-    message: 'I could help you with a loan, if so, type loan',
+    message: 'I could help you with a loan, if so, type loan.',
     trigger: '9'
   },
   {
     id: '9',
     user: true,
     trigger: ({steps}) => {
+      if (steps['9'].value.toLowerCase().includes('bye')) return 'bye'
       if (steps['9'].value.toLowerCase().includes('loan')) return '10'
       return '11'
     }
@@ -74,6 +76,7 @@ const chat = [
       {value: 'Loan', label: 'Do you want to apply for a loan?', trigger: 'loan'},
       {value: 'Help', label: 'Help', trigger: 'help'},
       {value: 'Loan conditions', label: 'Loan conditions', trigger: 'conditions'},
+      {value: 'GoodBye', label: 'Goodbye', trigger: 'bye'}
     ]
   },
   {
@@ -84,23 +87,24 @@ const chat = [
   {
     id: 'loan',
     component: <Loan />,
-    trigger: 'bye'
+    trigger: '10'
   },
   {
     id: 'help',
     component: <Help />,
-    trigger: 'bye'
+    trigger: '10'
   },
   {
     id:'conditions',
     component: <LoanCondition />,
-    trigger: 'bye'
+    trigger: '10'
   },
 
   //end
   {
     id: 'bye',
-    message: 'Goodbye.',
+    asMessage: true,
+    component: <GoodBye />,
     end: true
   }
 ]

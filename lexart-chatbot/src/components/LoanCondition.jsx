@@ -1,5 +1,13 @@
 export default function LoanCondition() {
   return (
-    <div>LoanCondition</div>
+    <div>
+    <a
+      href="https://www.postoffice.co.uk/personal-loans/fastchecker"
+      target="_blank"
+      rel="noreferrer"
+    >
+      Click here to see conditions.
+    </a>
+  </div>
   )
 }

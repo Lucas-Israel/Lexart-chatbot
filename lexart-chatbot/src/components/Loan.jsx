@@ -2,7 +2,7 @@ export default function Loan() {
   return (
     <div>
       <a
-        href=""
+        href="https://www.postoffice.co.uk/personal-loans"
         target="_blank"
         rel="noreferrer"
       >
