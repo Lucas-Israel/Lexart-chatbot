@@ -3,6 +3,10 @@
 
 ### How to check the project:
 
+https://lex-chatbot.vercel.app/
+
+or
+
 ```
 git clone git@github.com:Lucas-Israel/Lexart-chatbot.git
 cd Lexart-chatbot && cd lexart-chatbot
