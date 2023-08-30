@@ -3,19 +3,6 @@ import Help from '../components/Help';
 import LoanCondition from '../components/LoanCondition';
 import GoodBye from '../components/GoodBye';
 
-const secondMessage = ({previousValue}) => {
-  const message = (previousValue || '').toLowerCase();
-  if (message.includes('goodbye')) {
-    return 'I hope I can be of service in the future.'
-  }
-
-  if (message.includes('hello') || message.includes('good') || message.includes('i want')) {
-    return 'First, what is your name?'
-  }
-
-  return "I don't understand, could you reform your question? We could start with a simple hello."
-}
-
 const chat = [
   {
     id: '1',
@@ -25,16 +12,24 @@ const chat = [
   {
     id: '2',
     user: true,
-    trigger: '3'
+    trigger: ({steps}) => {
+      const message = steps['2'].message.toLowerCase();
+      if(message.includes('bye')) return 'bye before name';
+      if(message.includes('hello') || message.includes('i want') || message.includes('good')) return '3';
+      return "confused"
+    }
+  },
+  
+  //reply if it can't understand user's first input
+  {
+    id: 'confused',
+    message: "I don't understand. We could start with a simple hello.",
+    trigger: '2',
   },
   {
     id: '3',
-    message: secondMessage,
-    trigger: ({steps}) => {
-      if (steps['3'].message.includes('I hope')) return 'bye'
-      if (steps['3'].message.includes('First, ')) return '4'
-      return '2'
-    },
+    message: "First, what is your name?",
+    trigger: '4'
   },
   {
     id: '4',
@@ -100,7 +95,14 @@ const chat = [
     trigger: '10'
   },
 
-  //end
+  //end before asking name
+  {
+    id: 'bye before name',
+    message: 'Goodbye',
+    end: true
+  },
+
+  //CSV end
   {
     id: 'bye',
     asMessage: true,
